@@ -9,13 +9,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    @user = User.find_by(id: params[:id])
-    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
-    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
-    flash[:pageinfo] = @user.name
-  end
-
   def new
     flash[:pageinfo] = "新規登録"
     @user = User.new
@@ -89,22 +82,6 @@ class UsersController < ApplicationController
       redirect_to("/login")
   end
 
-  def likes
-    @user = User.find_by(id: params[:id])
-    @likes = Likestory.where(user_id: @user.id, f_del: false)
-    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
-    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
-    flash[:pageinfo] = @user.name
-  end
-
-  def likers
-    @user = User.find_by(id: params[:id])
-    @likers = Liker.where(user_id: @user.id).order(updated_at: :desc)
-    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
-    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
-    flash[:pageinfo] = @user.name
-  end
-
     
   def followers
     user = User.find_by(id: params[:id])
@@ -126,6 +103,31 @@ class UsersController < ApplicationController
       followings.push(follow.following_id)
     end
     @users = User.where('id IN (?)', followings).order(created_at: :desc)
+  end
+
+
+
+  def show
+    @user = User.find_by(id: params[:id])
+    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
+    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
+    flash[:pageinfo] = @user.name
+  end
+
+  def likes
+    @user = User.find_by(id: params[:id])
+    @likes = Likestory.where(user_id: @user.id, f_del: false)
+    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
+    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
+    flash[:pageinfo] = @user.name
+  end
+
+  def likers
+    @user = User.find_by(id: params[:id])
+    @likers = Liker.where(user_id: @user.id).order(updated_at: :desc)
+    @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
+    @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
+    flash[:pageinfo] = @user.name
   end
 
   def ensure_correct_user

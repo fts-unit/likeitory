@@ -1,68 +1,44 @@
-<div class="main user-show">
-  <div class="container">
-    
-    <div class="user">
-      <img src="/user_images/<%= @user.image_name %>">
-      <h2><%= @user.name %></h2>
-      <% if @user.id == @current_user.id %>
-        <p><%= @user.email %></p>
-        <p>手持ちのライカー：<%= @user.likers.count %></p>
-      <% end %>
-      <p><%= @user.intro %></p>
-      <%= @followers_count %>
-      <%= link_to("フォロワー", "/users/#{@user.id}/followers") %>
-      <%= @followings_count %>
-      <%= link_to("フォロー", "/users/#{@user.id}/followings") %>
-      <% if @user.id == @current_user.id %>
-        <%= link_to("編集", "/users/#{@user.id}/edit", class: "rad-link") %>
+<% content_for :user_content do %>
+  <ul class="user-tabs">
+    <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
+    <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+    <li class="active"><%= link_to("ライカたち", "/users/#{@user.id}/likers") %></li>
+  </ul>
+
+  <% @likers.each do |liker| %>
+    <div class="posts-index-item">
+      <div class="likers-list-name">
+      <% if liker.name %>
+        <%= link_to(liker.name, "/likers/#{liker.id}") %>
       <% else %>
-        <% if Follow.find_by(follower_id: @current_user.id, following_id: @user.id) %>
-          <%= link_to("フォロー中", "/follows/#{@user.id}/destroy", {method: "post", class: "rad-link"}) %>
-        <% else %>
-          <%= link_to("フォローする", "/follows/#{@user.id}/create", {method: "post", class: "rad-link"}) %>
-        <% end %>
+        <%= link_to(Settings.liker.unnamed_liker_name, "/likers/#{liker.id}") %>
       <% end %>
-    </div>
-    
-    <ul class="user-tabs">
-      <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
-      <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-      <li class="active"><%= link_to("ライカたち", "/users/#{@user.id}/likers") %></li>
-    </ul>
+      </div>
 
-    <% @likers.each do |liker| %>
-        <div class="posts-index-item">
-          <div class="likers-list-name">
-          <% if liker.name %>
-            <%= link_to(liker.name, "/likers/#{liker.id}") %>
-          <% else %>
-            <%= link_to(Settings.liker.unnamed_liker_name, "/likers/#{liker.id}") %>
-          <% end %>
-          </div>
+      <% lastlike = Likestory.where(liker_id: liker.id).last %>
+      <% if lastlike %>
+      <% post = Post.find_by(id: lastlike.post_id) %>
+        <div class="post-left">
+        <% if post.user %>
+          <img src="<%= "/user_images/#{post.user.image_name}" %>">
+        <% else %>
+          <img src="/user_images/deleted_user.jpg">
+        <% end %>
+        </div>
 
-          <% lastlike = Likestory.where(liker_id: liker.id).last %>
-          <% if lastlike %>
-          <% post = Post.find_by(id: lastlike.post_id) %>
-            <div class="post-left">
+        <div class="post-right">
+          <div class="post-user-name">
             <% if post.user %>
-              <img src="<%= "/user_images/#{post.user.image_name}" %>">
+              <%= link_to(post.user.name, "javascript:void(0)") %>
             <% else %>
-              <img src="/user_images/deleted_user.jpg">
+              <% Settings.user.deleted_user_name %>
             <% end %>
-            </div>
-
-            <div class="post-right">
-              <div class="post-user-name">
-                <% if post.user %>
-                  <%= link_to(post.user.name, "javascript:void(0)") %>
-                <% else %>
-                  <% Settings.user.deleted_user_name %>
-                <% end %>
-              </div>
-              <%= link_to(post.content, "javascript:void(0)") %>
-            </div>
-          <% end %>
+          </div>
+          <%= link_to(post.content, "javascript:void(0)") %>
         </div>
       <% end %>
-  </div>
-</div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render template: "layouts/user" %>
