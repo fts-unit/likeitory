@@ -10,6 +10,7 @@ class PostsController < ApplicationController
     follows.each do |follow|
       followings.push(follow.following_id)
     end
+    @post = Post.new
     @posts = Post.where('user_id IN (?)', followings).order(created_at: :desc)
   end
 
