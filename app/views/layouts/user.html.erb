@@ -5,11 +5,11 @@
     <div class="user">
       <img src="/user_images/<%= @user.image_name %>">
       <h2><%= @user.name %></h2>
+      <p><%= @user.intro %></p>
       <% if @user.id == @current_user.id %>
         <p><%= @user.email %></p>
         <p>手持ちのライカー：<%= @user.likers.count %></p>
       <% end %>
-      <p><%= @user.intro %></p>
       <%= @followers_count %>
       <%= link_to("フォロワー", "/users/#{@user.id}/followers") %>
       <%= @followings_count %>

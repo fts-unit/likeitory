@@ -3,7 +3,7 @@
     <%= form_tag("/posts/create") do %>
       <div class="form">
         <div class="form-body">
-        <h2>新しいつぶやき</h2>
+        <h2>投稿する</h2>
         <% @post.errors.full_messages.each do |message| %>
           <div class="form-error">
             <%= message %>
