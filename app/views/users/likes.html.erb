@@ -1,0 +1,57 @@
+<div class="main user-show">
+  <div class="container">
+    
+    <div class="user">
+      <img src="/user_images/<%= @user.image_name %>">
+      <h2><%= @user.name %></h2>
+      <% if @user.id == @current_user.id %>
+        <p><%= @user.email %></p>
+        <p>手持ちのライカー：<%= @user.likers.count %></p>
+      <% end %>
+      <p><%= @user.intro %></p>
+      <%= @followers_count %>
+      <%= link_to("フォロワー", "/users/#{@user.id}/followers") %>
+      <%= @followings_count %>
+      <%= link_to("フォロー", "/users/#{@user.id}/followings") %>
+      <% if @user.id == @current_user.id %>
+        <%= link_to("編集", "/users/#{@user.id}/edit", class: "rad-link") %>
+      <% else %>
+        <% if Follow.find_by(follower_id: @current_user.id, following_id: @user.id) %>
+          <%= link_to("フォロー中", "/follows/#{@user.id}/destroy", {method: "post", class: "rad-link"}) %>
+        <% else %>
+          <%= link_to("フォローする", "/follows/#{@user.id}/create", {method: "post", class: "rad-link"}) %>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <ul class="user-tabs">
+      <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
+      <li class="active"><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <li><%= link_to("ライカたち", "/users/#{@user.id}/likers") %></li>
+    </ul>
+
+    <% @likes.each do |like| %>
+        <% post = Post.find_by(id: like.post_id) %>
+        
+        <div class="posts-index-item">
+          <div class="post-left">
+          <% if post.user %>
+            <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          <% else %>
+            <img src="/user_images/deleted_user.jpg">
+          <% end %>
+          </div>
+          <div class="post-right">
+            <div class="post-user-name">
+              <% if post.user %>
+                <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+              <% else %>
+                <%= Settings.user.deleted_user_name %>
+              <% end %>
+            </div>
+            <%= link_to(post.content, "/posts/#{post.id}") %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

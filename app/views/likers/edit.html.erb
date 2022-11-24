@@ -1,0 +1,20 @@
+<div class="main liker-edit">
+  <div class="container">
+    <div class="form-heading">ライカに命名</div>
+    <div class="form liker-form">
+      <div class="form-body">
+      <% @liker.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <%= message %>
+        </div>
+      <% end %>
+
+      <%= form_tag("/likers/#{@liker.id}/update") do %>
+        <p>ライカのなまえ</p>
+        <input name="name" value="<%= @liker.name %>">
+        <input type="submit" value="保存">
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

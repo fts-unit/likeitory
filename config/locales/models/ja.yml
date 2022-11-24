@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      post:
+        content: つぶやき
+      user:
+        intro: 自己紹介
+      liker:
+        name: ライカのなまえ
