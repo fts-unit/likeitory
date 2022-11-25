@@ -21,25 +21,30 @@ class UsersController < ApplicationController
       image_name: "default_user.jpg",
       password: params[:password]
     )
-    if @user.save
-      num = 0
-      while num < 10 do
-          liker = Liker.new(user_id: @user.id)
-          liker.save
-          num += 1
+    if params[:passward_confirm] == params[:password]
+      if @user.save
+        num = 0
+        while num < 10 do
+            liker = Liker.new(user_id: @user.id)
+            liker.save
+            num += 1
+        end
+        @follow = Follow.new(
+          follower_id: @user.id,
+          following_id: @user.id
+        )
+        @follow.save
+        session[:user_id] = @user.id
+        flash[:notice] = "ユーザー登録が完了しました"
+        redirect_to("/users/#{@user.id}")
+      else
+        render("users/new")
       end
-      @follow = Follow.new(
-        follower_id: @user.id,
-        following_id: @user.id
-      )
-      @follow.save
-      session[:user_id] = @user.id
-      flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/users/#{@user.id}")
     else
+      @user.errors.add(:base, 'パスワードが合致しません。入力し直してください。')
       render("users/new")
     end
-  end
+end
 
   def edit
     flash[:pageinfo] = "ユーザー情報の編集"
