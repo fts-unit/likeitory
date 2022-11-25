@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "users/:id/followings" => "users#followings"
 
   get 'posts/index' => 'posts#index'
+  get 'posts/all' => 'posts#all'
   get 'posts/new' => 'posts#new'
   get 'posts/:id' => 'posts#show'
   post 'posts/create' => 'posts#create'

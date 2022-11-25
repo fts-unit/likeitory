@@ -5,13 +5,23 @@ class PostsController < ApplicationController
   
   def index
     flash[:pageinfo] = "つぶやき一覧"
-    follows = Follow.where(follower_id: @current_user.id)
-    followings = []
-    follows.each do |follow|
-      followings.push(follow.following_id)
-    end
+    @followings_count = Follow.where(follower_id: @current_user.id).where.not(following_id: @current_user.id).count
     @post = Post.new
-    @posts = Post.where('user_id IN (?)', followings).order(created_at: :desc)
+    if @followings_count == 0
+      @posts = Post.all
+    else
+      follows = Follow.where(follower_id: @current_user.id)
+      followings = []
+      follows.each do |follow|
+        followings.push(follow.following_id)
+      end
+      @posts = Post.where('user_id IN (?)', followings).order(created_at: :desc)
+    end
+  end
+
+  def all
+    flash[:pageinfo] = "つぶやき一覧"
+    @posts = Post.all
   end
 
   def show

@@ -16,6 +16,18 @@
     font-weight: normal;
   }
 }
+.message-for-following {
+  margin: 0 auto 10px;
+  text-align: center;
+  a {
+    color: #590d0d;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  a:hover {
+    color:#8899a6;
+  }
+}
 
 .post-left img {
   width: 50px;

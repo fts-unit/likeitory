@@ -8,7 +8,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
@@ -30,7 +29,7 @@
         <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
       </li>
       <li>
-        <%= link_to("みんなのつぶやき", "/posts/index") %>
+        <%= link_to("みんなのつぶやき", "/posts/all") %>
       <li>
         <%= link_to("新しくつぶやく", "/posts/new") %>
       </li>
@@ -64,4 +63,5 @@
   
     <%= content_for?(:content) ? yield(:content) : yield %>
   </body>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </html>

@@ -28,6 +28,11 @@ class UsersController < ApplicationController
           liker.save
           num += 1
       end
+      @follow = Follow.new(
+        follower_id: @user.id,
+        following_id: @user.id
+      )
+      @follow.save
       session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")

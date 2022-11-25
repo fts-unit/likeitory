@@ -1,26 +1,5 @@
 <div class="main posts-index">
-  <div class="container index-postarea">
-    <%= form_tag("/posts/create") do %>
-      <div class="form">
-        <div class="form-body">
-        <h2>新しいつぶやき</h2>
-        <% @post.errors.full_messages.each do |message| %>
-          <div class="form-error">
-            <%= message %>
-          </div>
-        <% end %>
-          <textarea name="content"><%= @post.content %></textarea>
-          <input type="submit" value="つぶやく">
-        </div>
-      </div>
-    <% end %>
-  </div>
   <div class="container">
-  <% if @followings_count == 0%>
-    <div class="message-for-following">
-      <%= link_to("フォローをしてみんなとつながりましょう♪", "/users/index") %>
-    </div>
-  <% end %>
   <% @posts.each do |post| %>
     <div class="posts-index-item">
       <div class="post-left">

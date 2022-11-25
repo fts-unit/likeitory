@@ -15,14 +15,12 @@
 //= require turbolinks
 //= require_tree .
 
-document.addEventListener("DOMContentLoaded", function(){
-    var $ham_dom = document.getElementById("ham-btn");
-    $ham_dom.addEventListener('click', function() {
-        var $menu_dom = document.getElementById("menus-ul");
-        if(document.defaultView.getComputedStyle($menu_dom, '').display === "none"){
-            $menu_dom.style.display = "block"
-        } else {
-            $menu_dom.style.display = "none"
-        }
-    });
-}, false);
+var $ham_dom = document.getElementById("ham-btn");
+$ham_dom.addEventListener('click', function() {
+    var $menu_dom = document.getElementById("menus-ul");
+    if(document.defaultView.getComputedStyle($menu_dom, '').display === "none"){
+        $menu_dom.style.display = "block"
+    } else {
+        $menu_dom.style.display = "none"
+    }
+});
