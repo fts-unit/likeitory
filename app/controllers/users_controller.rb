@@ -108,6 +108,7 @@ class UsersController < ApplicationController
 
 
   def show
+    @path = "show"
     @user = User.find_by(id: params[:id])
     @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
     @followings_count = Follow.where(follower_id: params[:id]).where.not(following_id: params[:id]).count
@@ -115,6 +116,7 @@ class UsersController < ApplicationController
   end
 
   def likes
+    @path = "likes"
     @user = User.find_by(id: params[:id])
     @likes = Likestory.where(user_id: @user.id, f_del: false)
     @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count
@@ -123,6 +125,7 @@ class UsersController < ApplicationController
   end
 
   def likers
+    @path = "likers"
     @user = User.find_by(id: params[:id])
     @likers = Liker.where(user_id: @user.id).order(updated_at: :desc)
     @followers_count = Follow.where(following_id: params[:id]).where.not(follower_id: params[:id]).count

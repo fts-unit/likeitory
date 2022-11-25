@@ -24,7 +24,11 @@
         <% end %>
       <% end %>
     </div>
-
+    <ul class="user-tabs">
+      <%  if @path == "show"%><li class="active"><% else %><li><% end %><%= link_to("投稿", "/users/#{@user.id}") %></li>
+      <%  if @path == "likes"%><li class="active"><% else %><li><% end %><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+      <%  if @path == "likers"%><li class="active"><% else %><li><% end %><%= link_to("ライカたち", "/users/#{@user.id}/likers") %></li>
+    </ul>
     <%= yield(:user_content) or yield %>
 
   </div>

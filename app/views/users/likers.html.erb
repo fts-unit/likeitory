@@ -1,10 +1,4 @@
 <% content_for :user_content do %>
-  <ul class="user-tabs">
-    <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
-    <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-    <li class="active"><%= link_to("ライカたち", "/users/#{@user.id}/likers") %></li>
-  </ul>
-
   <% @likers.each do |liker| %>
     <div class="posts-index-item">
       <div class="likers-list-name">
