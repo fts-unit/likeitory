@@ -57,7 +57,8 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  width: 600px;
+  max-width: 90vw;
   margin: 60px auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -246,3 +247,41 @@ header {
   border-radius: 0 0 2px 2px;
   font-size: 14px;
 }
+
+/* スマホ対応 */
+.ham-menus {
+  display: none;
+}
+
+@media screen and (max-width:670px) {
+  .ham-menus {
+    display: block;
+    float: right;
+    margin-right: 20px;
+    color: #d8dadf;
+    font-size: 32px;
+    line-height: 64px;
+  }
+  .header-menus {
+    display: none;
+    background-color: #A64B4B;
+    position: relative;
+    float:none;
+    top: 64px;
+    width: 100vw;
+    padding: 0 auto;
+    text-align: center;
+    transition: 0.2s;
+  }
+  
+  .header-menus li {
+    float: none;
+    padding: 0 auto;
+  }
+  
+  .header-menus a {
+    float: none;
+    padding: 0 auto;
+  }
+}
+

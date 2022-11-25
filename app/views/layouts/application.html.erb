@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Likeitory<% if flash[:pageinfo] %><%= " -#{flash[:pageinfo]}-" %><% end %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,15 +21,18 @@
       <%= link_to("Likeitory", "/") %>
     <% end %>
     </div>
-    <ul class="header-menus">
+    <div class="ham-menus" id="ham-btn">
+      <i class="fa fa-navicon"></i>
+    </div>
+    <ul class="header-menus" id="menus-ul">
     <% if @current_user %>
       <li>
         <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
       </li>
       <li>
-        <%= link_to("投稿一覧", "/posts/index") %>
+        <%= link_to("みんなのつぶやき", "/posts/index") %>
       <li>
-        <%= link_to("新規投稿", "/posts/new") %>
+        <%= link_to("新しくつぶやく", "/posts/new") %>
       </li>
       <li>
         <%= link_to("ユーザー一覧", "/users/index") %>
@@ -37,7 +42,7 @@
       </li>
       
     <% else %>
-      <!-- ログインしていない状態でヘッダーに表示するHTMLを貼り付けてください --><li>
+      <li>
         <%= link_to("Likeitoryとは", "/about") %>
       </li>
       <li>
