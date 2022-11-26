@@ -154,6 +154,20 @@ header {
   font-size: 24px;
 }
 
+.top-signup {
+  margin-top: 30px;
+}
+.top-signup a {
+  padding: 20px 30px;
+  color: #f5f8fa;
+  background-color: #590d0d;
+  border: 2px solid #590d0d;
+  border-radius: 5px;
+}
+.top-signup a:hover {
+  background-color: #AF6E6E;
+}
+
 /* about ================================ */
 .about-main {
   padding: 180px 8% 0;
@@ -273,15 +287,24 @@ header {
     text-align: center;
     transition: 0.2s;
   }
-  
   .header-menus li {
     float: none;
     padding: 0 auto;
   }
-  
   .header-menus a {
     float: none;
     padding: 0 auto;
+  }
+  
+  .top-message h2 {
+    text-align: left;
+    padding-left: 20px;
+    font-size: 32px;
+  }
+  .top-message p {
+    text-align: left;
+    padding-left: 20px;
+    font-size: 18px;
   }
 }
 
