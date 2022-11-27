@@ -20,6 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rails-i18n'
 # 定数管理
 gem 'config'
+# パスワードハッシュ化
+gem 'bcrypt'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
