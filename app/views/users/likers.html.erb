@@ -12,24 +12,37 @@
       <% lastlike = Likestory.where(liker_id: liker.id).last %>
       <% if lastlike %>
       <% post = Post.find_by(id: lastlike.post_id) %>
-        <div class="post-left">
-        <% if post.user %>
-          <img src="<%= "/user_images/#{post.user.image_name}" %>">
-        <% else %>
-          <img src="/user_images/deleted_user.jpg">
-        <% end %>
-        </div>
-
-        <div class="post-right">
-          <div class="post-user-name">
-            <% if post.user %>
-              <%= link_to(post.user.name, "javascript:void(0)") %>
-            <% else %>
-              <% Settings.user.deleted_user_name %>
-            <% end %>
+        <% if post %>
+          <div class="post-left">
+          <% if post.user %>
+            <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          <% else %>
+            <img src="/user_images/deleted_user.jpg">
+          <% end %>
           </div>
-          <%= link_to(post.content, "javascript:void(0)") %>
-        </div>
+
+          <div class="post-right">
+            <div class="post-user-name">
+              <% if post.user %>
+                <%= link_to(post.user.name, "javascript:void(0)") %>
+              <% else %>
+                <%= Settings.user.deleted_user_name %>
+              <% end %>
+            </div>
+            <%= link_to(post.content, "javascript:void(0)") %>
+          </div>
+        <% else %>
+          <div class="post-left">
+            <img src="/user_images/deleted_user.jpg">
+          </div>
+
+          <div class="post-right">
+            <div class="post-user-name">
+              <%= Settings.post.deleted_post_user_name %>
+            </div>
+            <%= Settings.post.deleted_post %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

@@ -2,3 +2,6 @@ user:
   deleted_user_name: '（ *** 削除されたユーザー *** ）'
 liker:
   unnamed_liker_name: '名無しのライカ'
+post:
+  deleted_post_user_name: '（ *** 不明なユーザー *** ）'
+  deleted_post: '（ *** 削除されたつぶやき *** ）'

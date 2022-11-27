@@ -16,17 +16,40 @@
 
     <% @likestories.each do |ls| %>
       <% post = Post.find_by(id: ls.post_id)%>
-      <div class="posts-index-item">
-        <div class="post-left">
-          <img src="<%= "/user_images/#{post.user.image_name}" %>">
-        </div>
-        <div class="post-right">
-          <div class="post-liker-name">
-            <%= link_to(post.user.name, "/likers/#{post.user.id}") %>
+      <% if post %>
+        <div class="posts-index-item">
+          <div class="post-left">
+          <% if post.user %>
+            <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          <% else %>
+            <img src="/user_images/deleted_user.jpg">
+          <% end %>
           </div>
-          <%= link_to(post.content, "/posts/#{post.id}") %>
+
+          <div class="post-right">
+            <div class="post-user-name">
+              <% if post.user %>
+                <%= link_to(post.user.name, "javascript:void(0)") %>
+              <% else %>
+                <%= Settings.user.deleted_user_name %>
+              <% end %>
+            </div>
+            <%= link_to(post.content, "javascript:void(0)") %>
+          </div>
         </div>
-      </div>
+      <% else %>
+        <div class="posts-index-item">
+          <div class="post-left">
+            <img src="/user_images/deleted_user.jpg">
+          </div>
+          <div class="post-right">
+            <div class="post-liker-name">
+              <%= Settings.post.deleted_post_user_name %>
+            </div>
+            <%= Settings.post.deleted_post %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
 
   </div>

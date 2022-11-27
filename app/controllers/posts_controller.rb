@@ -7,8 +7,8 @@ class PostsController < ApplicationController
     flash[:pageinfo] = "つぶやき一覧"
     @followings_count = Follow.where(follower_id: @current_user.id).where.not(following_id: @current_user.id).count
     @post = Post.new
-    if @followings_count == 0
-      @posts = Post.all
+    if @followings_count == 0     
+      @posts = Post.all.order(created_at: :desc)
     else
       follows = Follow.where(follower_id: @current_user.id)
       followings = []
@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 
   def all
     flash[:pageinfo] = "つぶやき一覧"
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
   end
 
   def show
