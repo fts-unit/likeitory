@@ -27,5 +27,9 @@
 /public/assets
 .byebug_history
 
+# ユーザー画像は開発／本番で切り分け
+/public/user_images
+
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
