@@ -56,11 +56,7 @@ end
     @user.name = params[:name]
     @user.email = params[:email]
     @user.intro = params[:intro]
-    if params[:image]
-      @user.image_name = "#{@user.id}.jpg"
-      image = params[:image]
-      File.binwrite("public/user_images/#{@user.image_name}", image.read)
-    end
+    @user.image_name = params[:image_name]
     if @user.save
       flash[:notice] = "ユーザー情報を編集しました"
       redirect_to("/users/#{@user.id}")
@@ -149,6 +145,11 @@ end
       flash[:notice] = "権限がありません"
       redirect_to("/users/index")
     end
+  end
+  
+  private 
+  def user_params
+    params.require(:user).permit(:name, :email, :intro, :image)
   end
 
 end

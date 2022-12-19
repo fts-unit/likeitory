@@ -4,7 +4,15 @@
     <% @users.each do |user| %>
         <div class="users-index-item">
             <div class="user-left">
-                <img src="/user_images/<%= user.image_name %>">
+            <% if user %>
+                <% if user.image_name.to_s.empty? %>
+                    <img src="/user_images/default_user.jpg">
+                <% else %>
+                    <%= image_tag(user.image_name.to_s) %>
+                <% end %>
+            <% else %>
+                <img src="/user_images/deleted_user.jpg">
+            <% end %>
             </div>
             <div class="user-right">
                 <%= link_to(user.name, "/users/#{user.id}")  %>

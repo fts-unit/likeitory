@@ -14,11 +14,15 @@
       <% post = Post.find_by(id: lastlike.post_id) %>
         <% if post %>
           <div class="post-left">
-          <% if post.user %>
-            <img src="<%= "/user_images/#{post.user.image_name}" %>">
-          <% else %>
-            <img src="/user_images/deleted_user.jpg">
-          <% end %>
+            <% if post.user %>
+              <% if post.user.image_name.to_s.empty? %>
+                <img src="/user_images/default_user.jpg">
+              <% else %>
+                <%= image_tag(post.user.image_name.to_s) %>
+              <% end %>
+            <% else %>
+                <img src="/user_images/deleted_user.jpg">
+            <% end %>
           </div>
 
           <div class="post-right">

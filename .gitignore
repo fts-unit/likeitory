@@ -29,7 +29,7 @@
 
 # ユーザー画像は開発／本番で切り分け
 /public/user_images
-
+/public/uploads
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

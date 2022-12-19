@@ -24,6 +24,11 @@ gem 'config'
 # パスワードハッシュ化
 gem 'bcrypt'
 
+# 画像アップロード
+gem 'cloudinary' , '1.11.1'
+gem 'carrierwave', '~> 1.3.1'
+gem 'dotenv-rails'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
